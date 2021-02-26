@@ -7,19 +7,19 @@
   <div class="row">
     <ul>
       <li class="notes">
-     <a class="position-relative " id="editableNote">
-       <div class="overflow-y-auto h-100">
-      <h2 #title contenteditable="true" (click)="selectAll()" (focusin)="selectAll()">Title</h2>
+     <div class="position-relative ">
+       <div class="note-item overflow-y-auto" id="editableNote">
+      <h2 #title (click)="selectAll()" (focusin)="selectAll()" contenteditable="true">Title</h2>
       <p #noteBody (click)="selectAll()" (focusin)="selectAll()" class="font-italic " contenteditable="true">Add your Notes here!</p>
-       <button (click)="addNote()" class="btn btn-dark w-100 rounded-0 position-absolute btn-position">Submit</button>
          </div>
-    </a>
+       <button (click)="addNote()" class="btn btn-dark w-100 rounded-0 position-absolute btn-position">Submit</button>
+    </div>
       </li>
       <li *ngFor="let item of notes" [id]="item.id">
-       <a href="#"  class="overflow-auto h-100">
+       <div class="note-item overflow-auto" href="#">
       <h2>{{item.title}}</h2>
       <p>{{item.description}}</p>
-    </a>
+    </div>
       </li>
     </ul>
 
