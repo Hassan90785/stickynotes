@@ -7,7 +7,8 @@ import {Note} from '../models/note';
 })
 export class NotesComponent implements OnInit {
 
-  @ViewChild('editableNote') field: ElementRef | undefined;
+  @ViewChild('title') title: ElementRef | undefined;
+  @ViewChild('noteBody') noteBody: ElementRef | undefined;
   notes: Note[] = [];
 
   constructor() {
@@ -17,17 +18,24 @@ export class NotesComponent implements OnInit {
   }
 
   addNote() {
-    // console.log(this.field.innerText);
     let obj: Note = new Note();
     obj.id = this.notes.length;
-    if (this.field) {
-      obj.description = this.field.nativeElement.innerText;
-      this.notes.length % 2 === 0 ? obj.bgClass = 'bg-black' : obj.bgClass = 'bg-gray';
+    if (this.noteBody && this.title) {
+      obj.description = this.noteBody.nativeElement.innerText;
+      obj.title = this.title.nativeElement.innerText;
     }
     this.notes.push(obj);
-    console.log(this.notes);
-    if (this.field) {
-      this.field.nativeElement.innerText = 'Add your Notes here!';
+    this.resetNote();
+  }
+
+  selectAll() {
+    document.execCommand('selectAll', false, '');
+  }
+
+  resetNote() {
+    if (this.noteBody && this.title) {
+      this.title.nativeElement.innerText = 'Title';
+      this.noteBody.nativeElement.innerText = 'Add your Notes here!';
     }
   }
 }

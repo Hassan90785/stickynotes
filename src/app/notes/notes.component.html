@@ -5,16 +5,23 @@
 <body>
 <div class="container-fluid">
   <div class="row">
-    <div class="note-container">
-      <div #editableNote class="h-75 overflow-y-auto" contenteditable="true" onclick="document.execCommand('selectAll',false,null)">
-        <p class="font-italic">Add your Notes here!</p>
-      </div>
-
-      <button (click)="addNote()" class="btn btn-dark w-100">Submit</button>
-    </div>
-    <div *ngFor="let item of notes" [id]="item.id" class="note-container overflow-y-auto" [class]="item.bgClass" >
-     {{item.description}}<br/>
-    </div>
+    <ul>
+      <li class="notes">
+     <a class="position-relative " id="editableNote">
+       <div class="overflow-y-auto h-100">
+      <h2 #title contenteditable="true" (click)="selectAll()" (focusin)="selectAll()">Title</h2>
+      <p #noteBody (click)="selectAll()" (focusin)="selectAll()" class="font-italic " contenteditable="true">Add your Notes here!</p>
+       <button (click)="addNote()" class="btn btn-dark w-100 rounded-0 position-absolute btn-position">Submit</button>
+         </div>
+    </a>
+      </li>
+      <li *ngFor="let item of notes" [id]="item.id">
+       <a href="#"  class="overflow-auto h-100">
+      <h2>{{item.title}}</h2>
+      <p>{{item.description}}</p>
+    </a>
+      </li>
+    </ul>
 
   </div>
 </div>
